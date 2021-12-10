@@ -1,9 +1,6 @@
 import classNames from 'classnames';
-import sizeOf from 'image-size';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 import React from 'react';
-
-import { useFetch } from '../../../hooks/use_fetch';
-import { fetchBinary } from '../../../utils/fetchers';
 
 /**
  * @typedef {object} Props
@@ -16,15 +13,6 @@ import { fetchBinary } from '../../../utils/fetchers';
  * @type {React.VFC<Props>}
  */
 const CoveredImage = ({ alt, src }) => {
-  const { data, isLoading } = useFetch(src, fetchBinary);
-
-  const imageSize = React.useMemo(() => {
-    return data !== null ? sizeOf(Buffer.from(data)) : null;
-  }, [data]);
-
-  const blobUrl = React.useMemo(() => {
-    return data !== null ? URL.createObjectURL(new Blob([data])) : null;
-  }, [data]);
 
   const [containerSize, setContainerSize] = React.useState({ height: 0, width: 0 });
   /** @type {React.RefCallback<HTMLDivElement>} */
@@ -35,22 +23,29 @@ const CoveredImage = ({ alt, src }) => {
     });
   }, []);
 
-  if (isLoading || data === null || blobUrl === null) {
-    return null;
-  }
-
+  const [imgSize, setImageSize] = React.useState({ height: 0, width: 0, ratio: 1 });
+  /** @type {React.RefCallback<HTMLDivElement>} */
+  const onImageLoaded = React.useCallback(({target:img}) => {
+    setImageSize({
+      height: img?.offsetHeight ?? 0,
+      width: img?.offsetWidth ?? 0,
+      ratio: (img?.offsetHeight / img?.offsetWidth ) ?? 1
+    });
+  }, []);
+  
   const containerRatio = containerSize.height / containerSize.width;
-  const imageRatio = imageSize?.height / imageSize?.width;
 
   return (
     <div ref={callbackRef} className="relative w-full h-full overflow-hidden">
-      <img
+      <LazyLoadImage
         alt={alt}
         className={classNames('absolute left-1/2 top-1/2 max-w-none transform -translate-x-1/2 -translate-y-1/2', {
-          'w-auto h-full': containerRatio > imageRatio,
-          'w-full h-auto': containerRatio <= imageRatio,
+          'w-auto h-full': containerRatio > imgSize.ratio,
+          'w-full h-auto': containerRatio <= imgSize.ratio,
         })}
-        src={blobUrl}
+        loading="lazy"
+        src={src}
+        onLoad={onImageLoaded}
       />
     </div>
   );
