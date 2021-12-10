@@ -26,6 +26,7 @@ const config = {
     proxy: {
       '/api': 'http://localhost:3000',
     },
+    static: [PUBLIC_PATH, UPLOAD_PATH],
   },
   devtool: 'inline-source-map',
   entry: {
