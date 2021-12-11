@@ -28,7 +28,6 @@ const config = {
     },
     static: [PUBLIC_PATH, UPLOAD_PATH],
   },
-  devtool: 'inline-source-map',
   entry: {
     main: [
       'core-js',
@@ -39,7 +38,7 @@ const config = {
       path.resolve(SRC_PATH, './index.jsx'),
     ],
   },
-  mode: 'none',
+  mode: process.env.NODE_ENV,
   module: {
     rules: [
       {
@@ -72,7 +71,7 @@ const config = {
       BUILD_DATE: new Date().toISOString(),
       // Heroku では SOURCE_VERSION 環境変数から commit hash を参照できます
       COMMIT_HASH: process.env.SOURCE_VERSION || '',
-      NODE_ENV: 'development',
+      NODE_ENV: process.env.NODE_ENV,
     }),
     new MiniCssExtractPlugin({
       filename: 'styles/[name].css',
@@ -91,5 +90,9 @@ const config = {
     },
   },
 };
+
+if (process.env.NODE_ENV !== 'production'){
+  module.exports.devtool = 'inline-source-map';
+}
 
 module.exports = config;
