@@ -80,6 +80,7 @@ const config = {
     new HtmlWebpackPlugin({
       inject: false,
       template: path.resolve(SRC_PATH, './index.html'),
+      scriptLoading: 'defer',
     }),
   ],
   resolve: {
