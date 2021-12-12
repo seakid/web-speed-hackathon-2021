@@ -33,7 +33,7 @@ app.use(bodyParser.raw({ limit: '10mb' }));
 // });
 app.use(cors({
   origin: "https://wsh-2021-seakid.netlify.app",
-  credentials: true,
+  credentials: false,
   optionsSuccessStatus: 200,
 }));
 
