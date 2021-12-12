@@ -5,6 +5,8 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const TerserPlugin = require("terser-webpack-plugin");
 
+// const TailwindCss = require('tailwindcss');
+
 
 const webpack = require('webpack');
 
@@ -55,7 +57,16 @@ const config = {
         use: [
           { loader: MiniCssExtractPlugin.loader },
           { loader: 'css-loader', options: { url: false } },
-          { loader: 'postcss-loader' },
+          { 
+            loader: 'postcss-loader',
+            // options: {
+            //   postcssOptions: {
+            //     plugins: [
+            //       TailwindCss,
+            //     ]
+            //   }
+            // }
+         },
         ],
       },
     ],
