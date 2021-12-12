@@ -91,6 +91,18 @@ const config = {
           from: path.resolve(SRC_PATH, '_redirects'),
           to: '',
         },
+        {
+          from: '../public/fonts',
+          to: 'fonts'
+        },
+        {
+          from: '../public/sprites',
+          to: 'sprites'
+        },
+        {
+          from: '../public/robots.txt',
+          to: ''
+        },
       ],
     }),
   ],
