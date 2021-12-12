@@ -78,6 +78,7 @@ const config = {
     }),
     new MiniCssExtractPlugin({
       filename: 'styles/[name].css',
+      chunkFilename: "styles/[id].css",
     }),
     new HtmlWebpackPlugin({
       inject: false,
@@ -94,7 +95,8 @@ const config = {
   },
   optimization: {
     minimizer: [
-      new TerserPlugin(),
+      // For webpack@5 you can use the `...` syntax to extend existing minimizers (i.e. `terser-webpack-plugin`), uncomment the next line
+      `...`,
       new CssMinimizerPlugin(),
     ],
   },
