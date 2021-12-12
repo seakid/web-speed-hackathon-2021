@@ -33,12 +33,12 @@ const config = {
   },
   entry: {
     main: [
+      'regenerator-runtime/runtime',
       path.resolve(SRC_PATH, './index.css'),
       path.resolve(SRC_PATH, './index.jsx'),
     ],
     corejs: 'core-js',
     jquerybinarytransport: 'jquery-binarytransport',
-    regenerator: 'regenerator-runtime/runtime',
     buildinfo: path.resolve(SRC_PATH, './buildinfo.js'),
   },
   mode: process.env.NODE_ENV,
