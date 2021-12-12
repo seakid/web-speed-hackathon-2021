@@ -15,14 +15,6 @@ const DIST_PATH = path.resolve(__dirname, '../dist');
 /** @type {import('webpack').Configuration} */
 const config = {
   devServer: {
-    static: [
-      {
-        directory: PUBLIC_PATH,
-      },
-      {
-        directory: UPLOAD_PATH,
-      },
-    ],
     historyApiFallback: true,
     host: '0.0.0.0',
     port: 8080,
@@ -78,7 +70,6 @@ const config = {
     }),
     new MiniCssExtractPlugin({
       filename: 'styles/[name].css',
-      chunkFilename: "styles/[id].css",
     }),
     new HtmlWebpackPlugin({
       inject: false,
