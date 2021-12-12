@@ -1,4 +1,4 @@
-/images/* https://wsh-2021-seakid.herokuapp.com/images/:splat 200
-/movies/* https://wsh-2021-seakid.herokuapp.com/movies/:splat 200
-/sounds/* https://wsh-2021-seakid.herokuapp.com/sounds/:splat 200
-/api/* https://wsh-2021-seakid.herokuapp.com/api/:splat 200
+/images/* https://wsh-2021-seakid.herokuapp.com/images/:splat 301
+/movies/* https://wsh-2021-seakid.herokuapp.com/movies/:splat 301
+/sounds/* https://wsh-2021-seakid.herokuapp.com/sounds/:splat 301
+/api/* https://wsh-2021-seakid.herokuapp.com/api/:splat 301
