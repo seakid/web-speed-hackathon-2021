@@ -5,7 +5,7 @@ module.exports = {
       {
         corejs: '3',
         modules: false,
-        useBuiltIns: false,
+        useBuiltIns: "usage",
       },
     ],
     [
